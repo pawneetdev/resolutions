@@ -4,8 +4,14 @@ if (Meteor.isClient)
 {
 	Template.body.helpers({
 		res: function() {
+            if (Session.get('hideFinished')) {
+                return Resolutions.find({ checked: {$ne: true} });
+            }
             return Resolutions.find();
-		}
+		},
+        hideFinished: function() {
+            return Session.get('hideFinished');
+        }
 	});
 
     Template.body.events({
@@ -20,6 +26,10 @@ if (Meteor.isClient)
             event.target.title.value = "";
 
             return false;
+        },
+
+        'change .hide-finished': function(event) {
+            Session.set('hideFinished', event.target.checked);
         }
     });
 
@@ -27,7 +37,7 @@ if (Meteor.isClient)
         'click .toggle-checked': function() {
             Resolutions.update(this._id, {$set: {checked: !this.checked}});
         },
-        'click .delete': function() {
+        'click .delete': function(event) {
             Resolutions.remove(this._id);
         }
     });
