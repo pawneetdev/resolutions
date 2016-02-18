@@ -10,6 +10,8 @@ Resolutions = new Mongo.Collection('resolutions'); //Collection for mongo-db
 
 if (Meteor.isClient)
 {
+    Meteor.subscribe("resolutions");
+
 	Template.body.helpers({
 		res: function() {
             if (Session.get('hideFinished')) {
@@ -53,9 +55,13 @@ if (Meteor.isClient)
  }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-	// code to run on server at startup
-  });
+    Meteor.startup(function () {
+	    // code to run on server at startup
+    });
+
+    Meteor.publish("resolutions", function() {
+        return Resolutions.find();
+    });
 }
 
 Meteor.methods({
