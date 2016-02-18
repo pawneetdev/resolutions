@@ -3,9 +3,9 @@ Resolutions = new Mongo.Collection('resolutions');
 if (Meteor.isClient)
 {
 	Template.body.helpers({
-		res: function(){
+		res: function() {
             return Resolutions.find();
-        }
+		}
 	});
  }
 
