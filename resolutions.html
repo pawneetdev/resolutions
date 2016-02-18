@@ -35,6 +35,8 @@
     <li class="{{# if checked }}checked{{/ if }}">
         <input type="checkbox" checked="{{ checked }}" class="toggle-checked">
         {{ title }}
-        <button class="delete">Remove</button>
+        {{# if currentUser}}
+            <button class="delete">Remove</button>
+        {{/ if }}
     </li>
 </template>
