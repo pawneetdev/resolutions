@@ -1,4 +1,12 @@
-Resolutions = new Mongo.Collection('resolutions');
+/*
+    * stylus (CSS preprocessor, changed resolutions.css to resolutions.styl)
+    * accounts-password (for login form)
+    * account-ui (for login form ui)
+    * accounts-facebook
+    * accounts-twitter
+    * accounts-github
+*/
+Resolutions = new Mongo.Collection('resolutions'); //Collection for mongo-db
 
 if (Meteor.isClient)
 {
@@ -40,6 +48,11 @@ if (Meteor.isClient)
         'click .delete': function(event) {
             Resolutions.remove(this._id);
         }
+    });
+
+    //accounts-password config
+    Accounts.ui.config({
+        passwordSignupFields: "USERNAME_ONLY" //To use username instead of email to login
     });
  }
 
